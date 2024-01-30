@@ -36,10 +36,10 @@ module.exports = {
           if (type) filter.type = type;
           if (user_id) filter.user_id = user_id;
           
-          filteredTrades = await Trade.find(filter).sort({ id: 'asc' });
+          filteredTrades = await tradeModel.find(filter)
         } else {
           // If no query parameters are provided, fetch all trades
-          filteredTrades = await Trade.find().sort({ id: 'asc' });
+          filteredTrades = await tradeModel.find()
         }
     
         res.status(200).json(filteredTrades);
@@ -47,5 +47,27 @@ module.exports = {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
       }
-    }
+    },
+
+    
+    getTradyById:async(req,res)=>{
+        const tradeId = req.params.id;
+
+        try {
+            const trade = await tradeModel.findById(tradeId);
+        
+            if (!trade) {
+              return res.status(404).send('ID not found');
+            }
+        
+            res.status(200).json(trade);
+          } catch (error) {
+            res.status(500).json({ error: 'Internal Server Error' });
+          }
+        },
+        notAllowedHandler:async(req,res)=>{
+            res.status(405).send('Method Not Allowed');
+        }
+
+    
 }
