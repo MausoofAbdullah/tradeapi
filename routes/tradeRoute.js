@@ -9,8 +9,8 @@ router.get('/trades',tradeController.getAllTrades)
 router.get('/trades/:id',tradeController.getTradyById)
 
 // Handling unsupported methods
-router.delete('/:id', tradeController.notAllowedHandler);
-router.put('/:id', tradeController.notAllowedHandler);
-router.patch('/:id', tradeController.notAllowedHandler);
+router.delete('/trades/:id', tradeController.notAllowedHandler);
+router.put('/trades/:id', tradeController.notAllowedHandler);
+router.patch('/trades/:id', tradeController.notAllowedHandler);
 
 module.exports = router;

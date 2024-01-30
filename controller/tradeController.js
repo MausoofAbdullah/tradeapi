@@ -4,7 +4,10 @@ module.exports = {
 
     //creating trades
     createTrades: async (req, res) => {
+        console.log("somethei")
+        console.log(req.body,'ere')
         const { type, user_id, symbol, shares, price, timestamp } = req.body;
+
 
         try {
           if (!['buy', 'sell'].includes(type) || shares < 1 || shares > 100) {
@@ -49,7 +52,7 @@ module.exports = {
       }
     },
 
-    
+
     getTradyById:async(req,res)=>{
         const tradeId = req.params.id;
 
@@ -66,6 +69,7 @@ module.exports = {
           }
         },
         notAllowedHandler:async(req,res)=>{
+            console.log("check")
             res.status(405).send('Method Not Allowed');
         }
 
